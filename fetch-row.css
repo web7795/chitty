@@ -1,0 +1,102 @@
+
+/* Responsiveness for desktop and mobile */
+@media (max-width: 768px) {
+  .box-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Table Styling */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling on smaller screens */
+  margin: 20px auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* Flexible column widths */
+}
+
+.table th, .table td {
+  border: 3px solid #1f1c1c;
+  padding: 10px;
+  text-align: left;
+  word-wrap: break-word; /* Prevent text overflow */
+}
+
+.table th {
+  background-color: #343a40;    
+  color: white;
+  font-weight: bold;
+}
+
+.table-striped tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #e8f4fc;
+}
+
+#loading {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Adjustments for Mobile Screens */
+@media (max-width: 768px) {
+  .table th, .table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table th, .table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+body {
+  background-color: #f4f7fa;
+  font-family: 'Arial', sans-serif;
+}
+
+
+/* Navigation Container */
+nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 buttons per row */
+  gap: 10px;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  justify-items: center; /* Center align items */
+}
+
+/* Navigation Buttons */
+nav button {
+  font-size: 1rem;
+  color: white;
+  background-color: #17ab50;
+  border: none;
+  font-weight: bold;
+  padding: 0.8rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Ensure buttons expand to fill each grid column */
+  max-width: 200px; /* Prevent overly large buttons */
+}
+
+nav button:hover {
+  background-color: #137c8a;
+}

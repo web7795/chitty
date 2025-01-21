@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheet Data Viewer</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+    <script src="script.js" defer></script> <!-- Link to the JavaScript file -->
+</head>
+<body>
+    <header>
+        <h1>ಪೂರ್ತಿ ಚೀಟಿ ಎತ್ತಿದವರ ವಿವರ</h1>
+    </header>
+
+    <nav>
+        <!-- Buttons to redirect to index.html -->
+        <button onclick="location.href='index.html'">ALL</button>
+        <button onclick="location.href='50t12main.html'">50 ಸಾವಿರ 12</button>
+        <button onclick="location.href='1l12main.html'">1 ಲಕ್ಷ 12</button>
+        <button onclick="location.href='2l12main.html'">2 ಲಕ್ಷ 12</button>
+        <button onclick="location.href='50t14main.html'">50 ಸಾವಿರ 14</button>
+        <button onclick="location.href='1l14main.html'">1 ಲಕ್ಷ 14</button>
+        <button onclick="location.href='https://infocusm21.github.io/Shetty2/'">Direct Home</button>
+    </nav>
+
+    <main>
+        <!-- Dynamic containers to display filtered data -->
+        <section>
+            <h3>50 ಸಾವಿರ 12 - ಆಗಸ್ಟ್ 2024</h3>
+            <div id="50thousand12-container" class="data-container"></div>
+        </section>
+
+        <section>
+            <h3>1 ಲಕ್ಷ 12 - ಜೂನ್ 2024</h3>
+            <div id="1lakh12-container" class="data-container"></div>
+        </section>
+
+        <section>
+            <h3>2 ಲಕ್ಷ 12 - ಡಿಸೆಂಬರ್ 2024</h3>
+            <div id="2lakh12-container" class="data-container"></div>
+        </section>
+
+        <section>
+            <h3>50 ಸಾವಿರ 14 - ಜನವರಿ 2024</h3>
+            <div id="50thousand14-container" class="data-container"></div>
+        </section>
+
+        <section>
+            <h3>1 ಲಕ್ಷ 14 - ನವೆಂಬರ್ 2023</h3>
+            <div id="1lakh14-container" class="data-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Chitty Sheet View Report </p>
+    </footer>
+</body>
+</html>

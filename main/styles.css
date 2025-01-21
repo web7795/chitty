@@ -1,0 +1,113 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #17ab50;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Navigation Container */
+nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 buttons per row */
+    gap: 10px;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    justify-items: center; /* Center align items */
+}
+
+/* Navigation Buttons */
+nav button {
+    font-size: 1rem;
+    color: white;
+    background-color: #17ab50;
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Ensure buttons expand to fill each grid column */
+    max-width: 200px; /* Prevent overly large buttons */
+}
+
+nav button:hover {
+    background-color: #138a40;
+}
+
+/* Main Content */
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Section Styles */
+section {
+    margin-bottom: 2rem;
+}
+
+section h3 {
+    margin-bottom: 1rem;
+    color: #17ab50;
+    font-size: 1.5rem;
+}
+
+/* Table Styles */
+.data-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.data-container th,
+.data-container td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.data-container th {
+    background-color: #17ab50;
+    color: white;
+    font-weight: bold;
+}
+
+.data-container tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.data-container tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    color: #777;
+    border-top: 1px solid #ddd;
+}
+
+/* Responsive Design */
+@media (min-width: 769px) {
+    nav {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust layout for larger screens */
+        justify-content: center;
+    }
+}
