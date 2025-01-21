@@ -35,7 +35,7 @@ nav {
 nav button {
     font-size: 1rem;
     color: white;
-    background-color: #17ab50;
+    background-color: #d4681b;
     border: none;
     padding: 0.8rem 1rem;
     border-radius: 5px;
@@ -46,7 +46,7 @@ nav button {
 }
 
 nav button:hover {
-    background-color: #138a40;
+    background-color: #d8b423;
 }
 
 /* Main Content */
