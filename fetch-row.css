@@ -100,3 +100,28 @@ nav button {
 nav button:hover {
   background-color: #137c8a;
 }
+/* Navigation 1  Container */
+nav1 {
+  display: grid;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  justify-items: center; /* Center align items */
+}
+
+/* Navigation 1  Buttons */
+nav1 button {
+  font-size: 1rem;
+  color: white;
+  background-color: #dc1512;
+  font-weight: bold;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Ensure buttons expand to fill each grid column */
+  max-width: 200px; /* Prevent overly large buttons */
+}
+
+nav1 button:hover {
+  background-color: #d41709;
+}
