@@ -97,7 +97,7 @@ function renderDataBox(containerId, data) {
             // Prepare the data to share
             const shareData = {
                 title: "Transaction Details",
-                text: `ದಿನಾಂಕ:      ${timestamp}\nಚೀಟಿ:           ${slNo} ನೇ ಚೀಟಿ\nಬ್ಯಾಲೆನ್ಸ್:     ${row.balance}\nಹೆಸರು:         ${row.name}\n\nಚೀಟಿ ಅಮೌಂಟ್:  100,000<\nಹರಾಜು:               ${row.haraj}\nಅಮೌಂಟ್:           ${row.amount}\n`,
+                text: `ದಿನಾಂಕ:      ${timestamp}\nಚೀಟಿ:           ${slNo} ನೇ ಚೀಟಿ\nಬ್ಯಾಲೆನ್ಸ್:     ${row.balance}\nಹೆಸರು:         ${row.name}\n\nಚೀಟಿ ಅಮೌಂಟ್:  100,000\nಹರಾಜು:               ${row.haraj}\nಅಮೌಂಟ್:           ${row.amount}\n`,
                  // Share the current URL (can be adjusted as needed) url: window.location.href
             };
 
