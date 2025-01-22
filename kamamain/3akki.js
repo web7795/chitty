@@ -141,7 +141,7 @@ async function filterData(name) {
 // Initialize the page and populate all containers
 document.addEventListener("DOMContentLoaded", async () => {
     // Initialize buttons' onclick functions to fetch data dynamically
-    const names = ["1-5 Lakh Akki Rajappa"]; // Add more names as needed
+    const names = ["3 Lakh Akki Rajappa"]; // Add more names as needed
     for (const name of names) {
         await filterData(name);
     }
