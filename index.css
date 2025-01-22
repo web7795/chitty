@@ -82,9 +82,7 @@ nav button:hover {
 }
 
 
-
-
-/* Navigation 1  Container */
+/* Navigation 1  house Container */
 nav1 {
   display: grid;
   background-color: #f9f9f9;
@@ -92,7 +90,7 @@ nav1 {
   justify-items: center; /* Center align items */
 }
 
-/* Navigation 1  Buttons */
+/* Navigation 1 house Buttons */
 nav1 button {
   font-size: 1rem;
   color: white;
@@ -111,6 +109,32 @@ nav1 button:hover {
   background-color: #d41709;
 }
 
+/* Navigation 1  Kamashipalya Container */
+nav2 {
+  display: grid;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  justify-items: center; /* Center align items */
+}
+
+/* Navigation 1 Kamashipalya Buttons */
+nav2 button {
+  font-size: 1rem;
+  color: white;
+  background-color: #430ee4;
+  border: none;
+  font-weight: bold;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Ensure buttons expand to fill each grid column */
+  max-width: 200px; /* Prevent overly large buttons */
+}
+
+nav2 button:hover {
+  background-color: #c1e40e;
+}
 
 /* Main Content */
 main {
