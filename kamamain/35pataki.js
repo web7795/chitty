@@ -80,7 +80,7 @@ function renderDataBox(containerId, data) {
             <p><strong>ದಿನಾಂಕ:</strong> <span>${timestamp}</span></p>
             <p><strong>ಚೀಟಿ :</strong> <span>${slNo} ನೇ ಚೀಟಿ</span></p>
             <p><strong>ಹೆಸರು:</strong> <span>${row.name}</span></p>
-             <p><strong>ಚೀಟಿ ಅಮೌಂಟ್:</strong> <span>200,000</span></p> <!-- Default Amount -->
+             <p><strong>ಚೀಟಿ ಅಮೌಂಟ್:</strong> <span>350,0000</span></p> <!-- Default Amount -->
             <p><strong>ಹರಾಜು:</strong> <span>${row.haraj}</span></p>
             <p><strong>ಒಟ್ಟು ಮೊತ್ತ ವ್ಯಕ್ತಿ ಪಡೆದಿರುವುದು:</strong> <span>${row.amount}</span></p>
             <p><strong>LV PMT:</strong> <span>${row.lvpmt}</span></p>
@@ -98,7 +98,7 @@ function renderDataBox(containerId, data) {
             // Prepare the data to share
             const shareData = {
                 title: "Transaction Details",
-                text: `ದಿನಾಂಕ:   ${timestamp} : 8 PM\nಚೀಟಿ:                    ${slNo} ನೇ ಚೀಟಿ\nಹೆಸರು:                  ${row.name}\nminimun:            42,0000\nಚೀಟಿ ಅಮೌಂಟ್:   200,000\nಹರಾಜು:                ${row.haraj}\nಅಮೌಂಟ್:            ${row.amount}\nLV PMT:              ${row.lvpmt}\nBalance:            ${row.balance}\n`,
+                text: `ದಿನಾಂಕ:   ${timestamp} : 8 PM\nಚೀಟಿ:                    ${slNo} ನೇ ಚೀಟಿ\nಹೆಸರು:                  ${row.name}\nminimun:            86,500\nಚೀಟಿ ಅಮೌಂಟ್:   350,000\nಹರಾಜು:                ${row.haraj}\nಅಮೌಂಟ್:            ${row.amount}\nLV PMT:              ${row.lvpmt}\nBalance:            ${row.balance}\n`,
                  // Share the current URL (can be adjusted as needed) url: window.location.href
             };
 
