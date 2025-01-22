@@ -24,7 +24,7 @@ async function fetchGoogleSheetData() {
                 name: row[1] ? row[1].trim() : "",
                 haraj: row[2] ? row[2].trim() : "",
                 amount: row[3] ? row[3].trim() : "",
-                lvint: row[4] ? row[4].trim() : "",
+                balance: row[4] ? row[4].trim() : "",
                 lvpmt: row[5] ? row[5].trim() : "",
             };
         });
@@ -84,7 +84,7 @@ function renderDataBox(containerId, data) {
             <p><strong>ಹರಾಜು:</strong> <span>${row.haraj}</span></p>
             <p><strong>ಒಟ್ಟು ಮೊತ್ತ ವ್ಯಕ್ತಿ ಪಡೆದಿರುವುದು:</strong> <span>${row.amount}</span></p>
             <p><strong>LV PMT:</strong> <span>${row.lvpmt}</span></p>
-            <p><strong>LV Interest:</strong> <span>${row.lvint}</span></p>
+            <p><strong>LV Interest:</strong> <span>${row.balance}</span></p>
            
         `;
 
@@ -98,7 +98,7 @@ function renderDataBox(containerId, data) {
             // Prepare the data to share
             const shareData = {
                 title: "Transaction Details",
-                text: `ದಿನಾಂಕ:   ${timestamp} : 8 PM\nಚೀಟಿ:                    ${slNo} ನೇ ಚೀಟಿ\nಹೆಸರು:                  ${row.name}\nminimun:            42,0000\nಚೀಟಿ ಅಮೌಂಟ್:   200,000\nಹರಾಜು:                ${row.haraj}\nಅಮೌಂಟ್:            ${row.amount}\nLV PMT:              ${row.lvpmt}\nLV Interest:         ${row.lvint}\n`,
+                text: `ದಿನಾಂಕ:   ${timestamp} : 8 PM\nಚೀಟಿ:                    ${slNo} ನೇ ಚೀಟಿ\nಹೆಸರು:                  ${row.name}\nminimun:            42,0000\nಚೀಟಿ ಅಮೌಂಟ್:   200,000\nಹರಾಜು:                ${row.haraj}\nಅಮೌಂಟ್:            ${row.amount}\nLV PMT:              ${row.lvpmt}\nBalance:            ${row.balance}\n`,
                  // Share the current URL (can be adjusted as needed) url: window.location.href
             };
 
@@ -141,7 +141,7 @@ async function filterData(name) {
 // Initialize the page and populate all containers
 document.addEventListener("DOMContentLoaded", async () => {
     // Initialize buttons' onclick functions to fetch data dynamically
-    const names = ["2 Lakh Mani"]; // Add more names as needed
+    const names = ["1-5 Lakh Akki Rajappa"]; // Add more names as needed
     for (const name of names) {
         await filterData(name);
     }
