@@ -136,6 +136,34 @@ nav2 button:hover {
   background-color: #c1e40e;
 }
 
+
+/* Navigation 3  rent Container */
+nav3 {
+  display: grid;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  justify-items: center; /* Center align items */
+}
+
+/* Navigation 3 rent Buttons */
+nav3 button {
+  font-size: 1rem;
+  color: white;
+  background-color: #e21ba0;
+  border: none;
+  font-weight: bold;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Ensure buttons expand to fill each grid column */
+  max-width: 200px; /* Prevent overly large buttons */
+}
+
+nav2 button:hover {
+  background-color: #c1e40e;
+}
+
 /* Main Content */
 main {
   padding: 2rem;
