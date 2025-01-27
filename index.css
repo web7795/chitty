@@ -160,8 +160,8 @@ nav3 button {
   max-width: 200px; /* Prevent overly large buttons */
 }
 
-nav2 button:hover {
-  background-color: #c1e40e;
+nav3 button:hover {
+  background-color: #e21ba0;
 }
 
 /* Main Content */

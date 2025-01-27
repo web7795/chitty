@@ -129,7 +129,7 @@ function renderDataBox(containerId, data) {
             // Prepare the data to share
             const shareData = {
                 title: "Transaction Details",
-                text: `ದಿನಾಂಕ: ${timestamp}\nಚೀಟಿ: ${slNo} ನೇ ಚೀಟಿ\nಬ್ಯಾಲೆನ್ಸ್: ${row.balance}\nಹೆಸರು: ${row.name}\n\nಚೀಟಿ ಅಮೌಂಟ್: 200,000\nಹರಾಜು: ${row.haraj}\nಅಮೌಂಟ್: ${row.amount}\n`,
+                text: `ದಿನಾಂಕ: ${timestamp}\nತಿಂಗಳುಗಳು: ${slNo} ನೇ ತಿಂಗಳು\nಹೆಸರು: ${row.name}\n\nAdvance: 15,000\nಬಾಡಿಗೆ: ${row.haraj}\nಅಮೌಂಟ್: ${row.amount}\nಬ್ಯಾಲೆನ್ಸ್: ${row.balance}\n`,
             };
 
             // Check if the browser supports the Share API
