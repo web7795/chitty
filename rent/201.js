@@ -21,7 +21,7 @@ async function fetchGoogleSheetData() {
             return {
                 timestamp: row[0] ? row[0].trim() : "",
                 range: row[1] ? row[1].trim() : "",
-                name: row[2] ? row[2].trim() : "",
+                name: row[1] ? row[1].trim() : "",
                 haraj: row[3] ? parseFloat(row[3].trim()) || 0 : 0,
                 amount: row[4] ? row[4].trim() : "",
                 balance: row[5] ? parseFloat(row[5].trim()) || 0 : 0,
@@ -119,7 +119,7 @@ function renderDataBox(containerId, data) {
             <p><strong>ಇನ್ನಿ ತರ ವಿವರಗಳು:</strong> <span>${row.amount}</span></p>
         `;
 
-        // Create Share Button
+        // Create Share Button  
         const shareButton = document.createElement("button");
         shareButton.textContent = "Share Data";
         shareButton.classList.add("share-button");
