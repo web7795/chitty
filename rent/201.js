@@ -83,7 +83,7 @@ function renderDataBox(containerId, data) {
         .map(year => {
             const { totalHaraj, totalBalance } = yearlyTotals[year];
             return `
-                <p>Year:<strong> ${year}</strong> 
+                <p>PH :	          77952 33044    ,Date :	      02 February 2021  \n Year:<strong> ${year}</strong> 
                ವರ್ಷದ ಬಾಡಿಗೆ: <strong>₹${totalHaraj.toLocaleString()}</strong> 
                ವರ್ಷದ Bill : <strong> ₹${totalBalance.toLocaleString()}</strong></p>
             `;
@@ -129,7 +129,7 @@ function renderDataBox(containerId, data) {
             // Prepare the data to share
             const shareData = {
                 title: "Transaction Details",
-                text: `ದಿನಾಂಕ: ${timestamp}\nತಿಂಗಳುಗಳು: ${slNo} ನೇ ತಿಂಗಳು\nಹೆಸರು: ${row.name}\n\nAdvance: 15,000\nಬಾಡಿಗೆ: ${row.haraj}\nಅಮೌಂಟ್: ${row.amount}\nಬ್ಯಾಲೆನ್ಸ್: ${row.balance}\n`,
+                text: `ದಿನಾಂಕ: ${timestamp}\nತಿಂಗಳುಗಳು: ${slNo} ನೇ ತಿಂಗಳು\nಹೆಸರು: ${row.name}\nAdvance: 15,000\nCurrent Bill : ${row.balance}\nಬಾಡಿಗೆ: ${row.haraj}\nReasoon : ${row.amount}\n`,
             };
 
             // Check if the browser supports the Share API
