@@ -21,6 +21,7 @@ async function fetchGoogleSheetData() {
             return {
                 timestamp: row[0] ? row[0].trim() : "",
                 range: row[1] ? row[1].trim() : "",
+                range2: row[2] ? row[2].trim() : "",
                 name: row[1] ? row[1].trim() : "",
                 haraj: row[3] ? parseFloat(row[3].trim()) || 0 : 0,
                 amount: row[4] ? row[4].trim() : "",
@@ -154,7 +155,7 @@ async function filterData(range) {
     const data = await fetchGoogleSheetData();
 
     // Filter the data for the specified range (based on row[1] for the 'range' column)
-    const filteredData = data.filter(item => item.range.toLowerCase() === range.toLowerCase());
+    const filteredData = data.filter(item => item.range2.toLowerCase() === range2.toLowerCase());
 
     // Sort the filtered data by timestamp in descending order (latest first)
     filteredData.sort((a, b) => {
@@ -170,7 +171,7 @@ async function filterData(range) {
 // Initialize the page and populate all containers
 document.addEventListener("DOMContentLoaded", async () => {
     // Initialize buttons' onclick functions to fetch data dynamically
-    const ranges = ["1 Prakash"]; // Add more ranges as needed
+    const ranges = ["1 Jayanth and Mahadevamma"]; // Add more ranges as needed
     for (const range of ranges) {
         await filterData(range);
     }
