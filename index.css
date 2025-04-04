@@ -160,10 +160,37 @@ nav3 button {
   max-width: 200px; /* Prevent overly large buttons */
 }
 
-nav3 button:hover {
-  background-color: #e21ba0;
+nav4 button:hover {
+  background-color: #19a4ea;
 }
 
+
+/* Navigation 3  rent Container */
+nav4 {
+  display: grid;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  justify-items: center; /* Center align items */
+}
+
+/* Navigation 3 rent Buttons */
+nav4 button {
+  font-size: 1rem;
+  color: white;
+  background-color: #1bbde2;
+  border: none;
+  font-weight: bold;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Ensure buttons expand to fill each grid column */
+  max-width: 200px; /* Prevent overly large buttons */
+}
+
+nav4 button:hover {
+  background-color: #14d2df;
+}
 /* Main Content */
 main {
   padding: 2rem;
