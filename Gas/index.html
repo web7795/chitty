@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Google Sheet Data Viewer</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background-color: #2cdfbe;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    /* Navigation Container */
+    nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 1rem;
+      background-color: #f9f9f9;
+      border-bottom: 1px solid #ddd;
+      justify-items: center;
+    }
+
+    /* Navigation Buttons */
+    nav button {
+      font-size: 1rem;
+      color: white;
+      background-color: #1b3fe2;
+      border: none;
+      padding: 0.8rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      max-width: 200px;
+    }
+
+    nav button:hover {
+      background-color: #d4681b;
+    }
+
+    /* Main Content */
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Section Styles */
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h3 {
+      margin-bottom: 1rem;
+      color: #17ab50;
+      font-size: 1.5rem;
+    }
+
+    /* Table Styles */
+    .data-container table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    .data-container th,
+    .data-container td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .data-container th {
+      background-color: #17ab50;
+      color: white;
+      font-weight: bold;
+    }
+
+    .data-container tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .data-container tr:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #f9f9f9;
+      color: #777;
+      border-top: 1px solid #ddd;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 769px) {
+      nav {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⛽Gas Booking Details</h1>
+  </header>
+
+  <nav>
+    <button onclick="location.href='nagaraj.html'">Nagaraj (Indian)</button>
+    <button onclick="location.href='jayashree.html'">Jayashree (Indian)</button>
+    <button onclick="location.href='shobha.html'">Shobha N (Bharat)</button>
+    <button onclick="location.href='harish.html'">Harish N (HP)</button>
+    <button onclick="location.href='index.html'">Total</button>
+  </nav>
+
+  <main class="data-container">
+    <div id="summary-table-container"></div>
+  </main>
+
+  <footer>
+    <p>&copy; Gas Booking View Report</p>
+  </footer>
+
+  <script>
+    const SHEET_ID = "1Z-z_LiRcacAJCD6bHPcKWRXtaLGb7wu6zTYZxA844jE";
+    const API_KEY = "AIzaSyBwnJTt3tZV61gebywzYb8MIDk4CTcleHQ";
+    const SHEET_NAME = "Sheet1";
+
+    const persons = {
+      harish: "Harish N (Hp Gas)",
+      nagaraj: "Nagaraj Shetty (Indian gas)",
+      jayashree: "Jayasri (Indian gas)",
+      shobha: "Shobha N (Bharat Gas)"
+    };
+
+    function fetchData() {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+      fetch(url)
+        .then(res => res.json())
+        .then(data => processData(data.values))
+        .catch(err => console.error("Error fetching data:", err));
+    }
+
+    function processData(rows) {
+      const countByYear = {};
+
+      rows.forEach((row, index) => {
+        if (index === 0) return; // Skip header
+        const timestamp = row[0];
+        const name = row[1];
+
+        const year = new Date(timestamp).getFullYear();
+
+        for (const key in persons) {
+          if (name === persons[key]) {
+            if (!countByYear[year]) {
+              countByYear[year] = { harish: 0, nagaraj: 0, jayashree: 0, shobha: 0 };
+            }
+            countByYear[year][key]++;
+          }
+        }
+      });
+
+      renderSummaryTable(countByYear);
+    }
+
+    function renderSummaryTable(data) {
+      const container = document.getElementById('summary-table-container');
+      const years = Object.keys(data).sort((a, b) => b - a); // Descending
+
+      
+
+      let html = `<table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Harish</th>
+            <th>Nagaraj</th>
+            <th>Jayashree</th>
+            <th>Shobha</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      years.forEach(year => {
+        const row = data[year];
+        html += `
+          <tr>
+            <td>${year}</td>
+            <td>${row.harish || 0}</td>
+            <td>${row.nagaraj || 0}</td>
+            <td>${row.jayashree || 0}</td>
+            <td>${row.shobha || 0}</td>
+          </tr>`;
+      });
+
+      html += `</tbody></table>`;
+      container.innerHTML = html;
+    }
+
+    window.onload = fetchData;
+  </script>
+</body>
+</html>

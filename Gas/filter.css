@@ -1,0 +1,154 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #17ab50;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Navigation Container */
+nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 buttons per row */
+    gap: 10px; /* Spacing between buttons */
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    justify-items: center; /* Center align items */
+}
+
+/* Navigation Buttons */
+nav button {
+    font-size: 1rem;
+    color: white;
+    background-color: #e22b1b;
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Ensure buttons expand to fill each grid column */
+    max-width: 200px; /* Prevent overly large buttons on wide screens */
+}
+
+nav button:hover {
+    background-color: #d4681b;;
+}
+
+/* Responsive Design */
+@media (min-width: 769px) {
+    nav {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust layout on larger screens */
+        justify-content: center;
+    }
+}
+
+/* Grid Layout for Mobile Screens */
+@media (max-width: 768px) {
+    nav {
+        grid-template-columns: repeat(3, 1fr); /* 3 buttons per row */
+        justify-items: center;
+    }
+}
+
+/* Main Content */
+main {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Grid Container for Data Boxes */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+/* Data Box Styles */
+.data-box {
+    background-color: white;
+    padding: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Title Box Styling */
+.title-box {
+    margin-bottom: 16px;
+}
+
+/* Title box styles to ensure left and right alignment */
+.title-box p {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between; /* This will align title on the left and data on the right */
+}
+/* Title Box Styling */
+.title-box {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Paragraph Styling inside the Title Box */
+.title-box p {
+    display: flex;
+    justify-content: flex-start;  /* Title on the left */
+    align-items: center;
+    margin: 1px 0;
+}
+
+/* Adjust fetched data to be centered */
+.title-box p span {
+    display: inline-block;
+    margin-left: auto;
+    text-align: 10px;  /* Center the fetched data */
+}
+
+.title-box p strong {
+    font-weight: bold;
+}
+
+/* Share Button Styling */
+.share-button {
+    background-color: #17ab50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.share-button:hover {
+    background-color: #138a40;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    color: #777;
+    border-top: 1px solid #ddd;
+}

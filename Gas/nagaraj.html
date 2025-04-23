@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Google Sheet Data Viewer</title>
+  <link rel="stylesheet" href="filter.css" />
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⛽Nagaraj Indian</h1>
+  </header>
+
+  <nav>
+    <button onclick="location.href='nagaraj.html'">Nagaraj (Indian)</button>
+    <button onclick="location.href='jayashree.html'">Jayashree (Indian)</button>
+    <button onclick="location.href='shobha.html'">Shobha N (Bharat)</button>
+    <button onclick="location.href='harish.html'">Harish N (HP)</button>
+    <button onclick="location.href='index.html'">Total</button>
+  </nav>
+
+  <div id="count-container"></div>
+  <div id="data-table-container"></div>
+
+  <script>
+    const SHEET_ID = "1Z-z_LiRcacAJCD6bHPcKWRXtaLGb7wu6zTYZxA844jE";
+    const API_KEY = "AIzaSyBwnJTt3tZV61gebywzYb8MIDk4CTcleHQ";
+    const SHEET_NAME = "Sheet1";
+
+    function fetchData() {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+      
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const rows = data.values;
+          displayData(rows);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function displayData(rows) {
+      const nameToSearch = "Nagaraj Shetty (Indian gas)";
+      const yearData = {};
+      const matchingRows = [];
+
+      rows.forEach((row, index) => {
+        if (index === 0) return; // skip header
+        const timestamp = row[0];
+        const name = row[1];
+        const other = row[2] || "";
+
+        if (name === nameToSearch) {
+          const year = new Date(timestamp).getFullYear();
+
+          if (!yearData[year]) {
+            yearData[year] = 0;
+          }
+          yearData[year]++;
+          matchingRows.push({ timestamp, name, other });
+        }
+      });
+
+      createYearCountTable(yearData);
+      createFullDataTable(matchingRows);
+    }
+
+    function createYearCountTable(yearData) {
+      const container = document.getElementById('count-container');
+      let tableHtml = '<h2>📊 Count per Year</h2>';
+      tableHtml += '<table><thead><tr><th>Year</th><th>Count</th></tr></thead><tbody>';
+
+      const sortedYears = Object.keys(yearData).sort((a, b) => b - a);
+      for (const year of sortedYears) {
+        tableHtml += `<tr><td>${year}</td><td>${yearData[year]}</td></tr>`;
+      }
+
+      tableHtml += '</tbody></table>';
+      container.innerHTML = tableHtml;
+    }
+
+    function createFullDataTable(rows) {
+        const container = document.getElementById('data-table-container');
+        container.innerHTML = '<h2>📋 Full Booking Records (Grouped by Year)</h2>';
+      
+        const yearGroups = {};
+      
+        // Group rows by year
+        rows.forEach(row => {
+          const year = new Date(row.timestamp).getFullYear();
+          if (!yearGroups[year]) {
+            yearGroups[year] = [];
+          }
+          yearGroups[year].push(row);
+        });
+      
+        const sortedYears = Object.keys(yearGroups).sort((a, b) => b - a); // Latest year first
+      
+        sortedYears.forEach(year => {
+          let tableHtml = `<h3>📅 Year: ${year}</h3>`;
+          tableHtml += '<table><thead><tr><th>Timestamp</th><th>⛽Gas Booking Details</th><th>Other Details</th></tr></thead><tbody>';
+      
+          // Sort each year's records latest first
+          yearGroups[year].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      
+          yearGroups[year].forEach(row => {
+            tableHtml += `<tr><td>${row.timestamp}</td><td>${row.name}</td><td>${row.other}</td></tr>`;
+          });
+      
+          tableHtml += '</tbody></table>';
+          container.innerHTML += tableHtml;
+        });
+      }
+      
+
+    window.onload = fetchData;
+  </script>
+</body>
+</html>
