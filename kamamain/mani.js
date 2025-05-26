@@ -78,7 +78,7 @@ function renderDataBox(containerId, data) {
         shareButton.addEventListener("click", () => {
             const shareData = {
                 title: "Transaction Details",
-                text: `ದಿನಾಂಕ: ${timestamp} : 8 PM\nಚೀಟಿ: ${slNo}ನೇ ಚೀಟಿ\nಮಿನಿಮಮ್: ${row.minimum}\nಪೇಮೆಂಟ್: ${row.payment}\nಬಡ್ಡಿ: ${row.interest}\nಹರಾಜು: ${row.haraj}\nಮಾಹಿತಿ: ${row.notes}`,
+                text: `ದಿನಾಂಕ:               ${timestamp} : 8 PM\nಚೀಟಿ:                    ${slNo}ನೇ ಚೀಟಿ\nಮಿನಿಮಮ್:         ${row.minimum}\nಪೇಮೆಂಟ್:           ${row.payment}\nಬಡ್ಡಿ:                     ${row.interest}\nಹರಾಜು:               ${row.haraj}\nಮಾಹಿತಿ:             ${row.notes}`,
             };
 
             if (navigator.share) {
