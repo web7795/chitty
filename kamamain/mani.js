@@ -1,9 +1,7 @@
-// Google Sheet ID and API key (Replace with your actual values)
-const SHEET_ID = "1Zkf_O7ck8JKB6BQdwU96YNvpRRh8DfQgCrlmplEOf50"; // Replace with your Google Sheet ID
-const API_KEY = "AIzaSyBwnJTt3tZV61gebywzYb8MIDk4CTcleHQ"; // Replace with your Google API Key
-const SHEET_NAME = "sheet1"; // Replace with your Google Sheet tab name
+const SHEET_ID = "1Zkf_O7ck8JKB6BQdwU96YNvpRRh8DfQgCrlmplEOf50";
+const API_KEY = "AIzaSyBwnJTt3tZV61gebywzYb8MIDk4CTcleHQ";
+const SHEET_NAME = "sheet1";
 
-// Function to fetch data from Google Sheets
 async function fetchGoogleSheetData() {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
     try {
@@ -15,94 +13,74 @@ async function fetchGoogleSheetData() {
             return [];
         }
 
-        // Parse the rows into structured objects (skip header)
-        const rows = data.values.slice(1); // Skip the header row
+        const rows = data.values.slice(1); // Skip header
 
-        return rows.map(row => {
-    return {
-        timestamp: row[0] || "",     // Timestamp
-        date: row[1] || "",          // ದಿನಾಂಕ (as number)
-        minimum: row[2] || "",       // ಮಿನಿಮಮ್
-        payment: row[3] || "",       // ಪೇಮೆಂಟ್
-        interest: row[4] || "",      // ಬಡ್ಡಿ
-        haraj: row[5] || "",         // ಹರಾಜು
-        notes: row[6] || "",         // ಇನ್ನಿತರ ಮಾಹಿತಿಗಳು ಇದ್ದಲ್ಲಿ
-    };
-});
-
+        return rows.map(row => ({
+            timestamp: row[0] || "",
+            date: row[1] || "",
+            minimum: row[2] || "",
+            payment: row[3] || "",
+            interest: row[4] || "",
+            haraj: row[5] || "",
+            notes: row[6] || "",
+        }));
     } catch (error) {
         console.error("Error fetching data from Google Sheets:", error);
         return [];
     }
 }
 
-// Function to format the timestamp into "Month Day, Year"
 function formatTimestamp(dateString) {
     const date = new Date(dateString);
-    if (isNaN(date)) return dateString; // Return original if invalid date
+    if (isNaN(date)) return dateString;
     const options = { year: "numeric", month: "long", day: "numeric" };
     return date.toLocaleDateString("en-US", options).replace(",", "");
 }
 
-// Function to render data in a box format
 function renderDataBox(containerId, data) {
     let container = document.getElementById(containerId);
 
-    // If container doesn't exist, create it dynamically
     if (!container) {
         container = document.createElement("div");
-        container.id = containerId; // Set the ID dynamically
-        document.body.appendChild(container); // Append it to the body or a specific section
+        container.id = containerId;
+        document.body.appendChild(container);
     }
 
     if (data.length === 0) {
-        container.innerHTML = "<p>No data available for this name.</p>";
+        container.innerHTML = "<p>No data available.</p>";
         return;
     }
 
-    // Create the grid layout container
     container.classList.add("grid-container");
+    container.innerHTML = ""; // Clear old content
 
     data.forEach((row, index) => {
         const dataBox = document.createElement("div");
         dataBox.classList.add("data-box");
 
-        // Add reverse serial number (Sl. No.)
-        const slNo = data.length - index; // Reverse order for serial number
-
-        // Format the timestamp at the top of each box
+        const slNo = data.length - index;
         const timestamp = formatTimestamp(row.timestamp);
 
-        // Create box content
         const titleBox = document.createElement("div");
         titleBox.classList.add("title-box");
+        titleBox.innerHTML = `
+            <p><strong>ದಿನಾಂಕ:</strong> <span>${row.date}</span></p>
+            <p><strong>ಮಿನಿಮಮ್:</strong> <span>${row.minimum}</span></p>
+            <p><strong>ಪೇಮೆಂಟ್:</strong> <span>${row.payment}</span></p>
+            <p><strong>ಬಡ್ಡಿ:</strong> <span>${row.interest}</span></p>
+            <p><strong>ಹರಾಜು:</strong> <span>${row.haraj}</span></p>
+            <p><strong>ಮಾಹಿತಿ:</strong> <span>${row.notes}</span></p>
+        `;
 
-        // Create the title box content dynamically
-       titleBox.innerHTML = `
-    <p><strong>ದಿನಾಂಕ:</strong> <span>${row.date}</span></p>
-    <p><strong>ಮಿನಿಮಮ್:</strong> <span>${row.minimum}</span></p>
-    <p><strong>ಪೇಮೆಂಟ್:</strong> <span>${row.payment}</span></p>
-    <p><strong>ಬಡ್ಡಿ:</strong> <span>${row.interest}</span></p>
-    <p><strong>ಹರಾಜು:</strong> <span>${row.haraj}</span></p>
-    <p><strong>ಮಾಹಿತಿ:</strong> <span>${row.notes}</span></p>
-`;
-
-
-        // Create Share Button
         const shareButton = document.createElement("button");
         shareButton.textContent = "Share Data";
         shareButton.classList.add("share-button");
-
-        // Button click event to share the data
         shareButton.addEventListener("click", () => {
-            // Prepare the data to share
             const shareData = {
                 title: "Transaction Details",
-                text: `ದಿನಾಂಕ:   ${timestamp} : 8 PM\nಚೀಟಿ:                    ${slNo} ನೇ ಚೀಟಿ\nಹೆಸರು:                  ${row.name}\nminimun:            21,0000\nಚೀಟಿ ಅಮೌಂಟ್:   100,000\nಹರಾಜು:                ${row.haraj}\nಅಮೌಂಟ್:            ${row.amount}\nLV PMT:              ${row.lvpmt}\n`,
-                 // Share the current URL (can be adjusted as needed) url: window.location.href
+                text: `ದಿನಾಂಕ: ${timestamp} : 8 PM\nಚೀಟಿ: ${slNo}ನೇ ಚೀಟಿ\nಮಿನಿಮಮ್: ${row.minimum}\nಪೇಮೆಂಟ್: ${row.payment}\nಬಡ್ಡಿ: ${row.interest}\nಹರಾಜು: ${row.haraj}\nಮಾಹಿತಿ: ${row.notes}`,
             };
 
-            // Check if the browser supports the Share API
             if (navigator.share) {
                 navigator.share(shareData)
                     .then(() => console.log("Data shared successfully."))
@@ -112,40 +90,23 @@ function renderDataBox(containerId, data) {
             }
         });
 
-        // Append everything to the data box
         dataBox.appendChild(titleBox);
         dataBox.appendChild(shareButton);
         container.appendChild(dataBox);
     });
 }
 
-// Filter and display data for a specific name
-async function filterData(name) {
+// Show all data sorted by the "date" column (newest first)
+async function displayAllData() {
     const data = await fetchGoogleSheetData();
 
-    // Filter the data for the specified name (based on row[1] for the 'name' column)
-    const filteredData = data.filter(item => item.name.toLowerCase() === name.toLowerCase());
-
-    // Sort the filtered data by timestamp in descending order (latest first)
-    filteredData.sort((a, b) => {
-        const dateA = new Date(a.timestamp);
-        const dateB = new Date(b.timestamp);
-        return dateB - dateA; // Sort in descending order (latest dates first)
+    const sortedData = data.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB - dateA; // Newest first
     });
 
-    // Render the data boxes in the corresponding container
-    renderDataBox(name.replace(/\s+/g, "").toLowerCase() + "-container", filteredData);
+    renderDataBox("50tho12-container", sortedData);
 }
 
-
-// Initialize the page and populate all containers
-document.addEventListener("DOMContentLoaded", async () => {
-    // Initialize buttons' onclick functions to fetch data dynamically
-    const names = ["1 Lakh Mani"]; // Add more names as needed
-    for (const name of names) {
-        await filterData(name);
-    }
-});
-
-
-
+document.addEventListener("DOMContentLoaded", displayAllData);
