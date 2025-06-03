@@ -2,38 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Google Sheet Data Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPF Tracker</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Donations Tracker</h1>
-  <div class="button-container">
-    <button onclick="filterByName('Nagaraja Shetty')">Nagaraja Shetty</button>
-    <button onclick="filterByName('Shobha N')">Shobha N</button>
-    <button onclick="filterByName('Harish N')">Harish N</button>
-    <button onclick="filterByName('Jayashree')">Jayashree</button>
-    <button onclick="filterByName('Punith')">Punith</button>
-    <button onclick="showAll()">Total</button>
+  <div class="header-container">
+    <h1>PPF Tracker</h1>
+    <div class="total-display">
+      <span>Total: ₹</span>
+      <span id="header-total">0</span>
+    </div>
   </div>
 
- <table id="data-table">
-  <thead>
-    <tr>
-      <th>Timestamp</th>
-      <th>Name</th>
-      <th>Amount</th>
-      <th>Details</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <td colspan="2"><strong>Total</strong></td>
-      <td id="totalAmount" colspan="2">0</td>
-    </tr>
-  </tfoot>
-  <tbody></tbody>
-</table>
+  <div class="button-container">
+    <!-- Buttons will be generated dynamically -->
+  </div>
 
+  <div class="table-container">
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
   <script src="script.js"></script>
 </body>

@@ -3,7 +3,7 @@ const API_KEY = "AIzaSyBwnJTt3tZV61gebywzYb8MIDk4CTcleHQ";
 const RANGE = "sheet1";
 const ENDPOINT = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
 let rawData = [];
-let names = []; // To store unique names for buttons
+let names = [];
 
 async function fetchData() {
   try {
@@ -23,46 +23,43 @@ async function fetchData() {
       headers.forEach((header, index) => {
         obj[header.toLowerCase()] = row[index] || '';
       });
+      obj.amount = parseFloat(obj.amount) || 0;
       return obj;
     });
 
-    // Extract unique names for filtering
     names = [...new Set(rawData.map(item => item.name))].sort();
     createFilterButtons();
     
-    renderTable(rawData);
+    showSummary(); // Show summary view by default
+    updateHeaderTotal(); // Update the header total
   } catch (error) {
     console.error("Error fetching data:", error);
-    document.getElementById("data-table").innerHTML = `<tr><td colspan="4">Error loading data. Please try again later.</td></tr>`;
+    document.querySelector("#data-table tbody").innerHTML = `<tr><td colspan="4">Error loading data. Please try again later.</td></tr>`;
   }
 }
 
 function formatTimestamp(ts) {
   const date = new Date(ts);
-  if (isNaN(date.getTime())) return ts; // fallback
-
+  if (isNaN(date.getTime())) return ts;
   return date.toLocaleString('en-IN', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
-    second: '2-digit',
     hour12: false
   }).replace(/\//g, '-');
 }
 
 function createFilterButtons() {
   const container = document.querySelector(".button-container");
-  container.innerHTML = ''; // Clear existing buttons
+  container.innerHTML = '';
   
-  // Add "All" button first
   const allButton = document.createElement("button");
   allButton.textContent = "All";
-  allButton.onclick = showAll;
+  allButton.onclick = showSummary;
   container.appendChild(allButton);
   
-  // Add buttons for each name
   names.forEach(name => {
     const button = document.createElement("button");
     button.textContent = name;
@@ -71,19 +68,65 @@ function createFilterButtons() {
   });
 }
 
+function updateHeaderTotal() {
+  const grandTotal = rawData.reduce((sum, row) => sum + row.amount, 0);
+  document.getElementById("header-total").textContent = grandTotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+}
+
+function showSummary() {
+  const tbody = document.querySelector("#data-table tbody");
+  tbody.innerHTML = "";
+
+  if (!rawData || rawData.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="4">No data available</td></tr>`;
+    return;
+  }
+
+  // Calculate totals per person
+  const summary = {};
+  let grandTotal = 0;
+
+  rawData.forEach(row => {
+    if (!summary[row.name]) {
+      summary[row.name] = 0;
+    }
+    summary[row.name] += row.amount;
+    grandTotal += row.amount;
+  });
+
+  // Create summary rows
+  Object.entries(summary).forEach(([name, total]) => {
+    const tr = document.createElement("tr");
+    
+    const cells = [
+      "",
+      name,
+      total.toLocaleString('en-IN', {minimumFractionDigits: 2}),
+      `${rawData.filter(row => row.name === name).length} donation(s)`
+    ];
+
+    cells.forEach(cell => {
+      const td = document.createElement("td");
+      td.textContent = cell;
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  updateHeaderTotal();
+}
+
 function renderTable(data) {
   const tbody = document.querySelector("#data-table tbody");
-  const totalCell = document.getElementById("totalAmount");
   tbody.innerHTML = "";
 
   if (!data || data.length === 0) {
     tbody.innerHTML = `<tr><td colspan="4">No data available</td></tr>`;
-    totalCell.textContent = "0";
     return;
   }
 
   const sortedData = [...data].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
   let total = 0;
 
   sortedData.forEach(row => {
@@ -92,22 +135,21 @@ function renderTable(data) {
     const cells = [
       formatTimestamp(row.timestamp),
       row.name,
-      parseFloat(row.amount) || 0,
+      row.amount.toLocaleString('en-IN', {minimumFractionDigits: 2}),
       row.details || ''
     ];
 
-    cells.forEach((cell, index) => {
+    cells.forEach(cell => {
       const td = document.createElement("td");
-      // Format amount with 2 decimal places
-      td.textContent = index === 2 ? cell.toLocaleString('en-IN', {minimumFractionDigits: 2}) : cell;
+      td.textContent = cell;
       tr.appendChild(td);
     });
 
-    total += parseFloat(row.amount) || 0;
+    total += row.amount;
     tbody.appendChild(tr);
   });
 
-  totalCell.textContent = total.toLocaleString('en-IN', {minimumFractionDigits: 2});
+  document.getElementById("header-total").textContent = total.toLocaleString('en-IN', {minimumFractionDigits: 2});
 }
 
 function filterByName(name) {
@@ -115,9 +157,4 @@ function filterByName(name) {
   renderTable(filtered);
 }
 
-function showAll() {
-  renderTable(rawData);
-}
-
-// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', fetchData);
