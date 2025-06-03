@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>macOS Startup Commands</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(120deg, #4b6cb7, #182848);
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+    }
+
+    table {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    th, td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    th {
+      background-color: rgba(0, 0, 0, 0.3);
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 600px) {
+      th, td {
+        font-size: 0.9rem;
+        padding: 12px 15px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>macOS Startup Commands</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Key Combination</th>
+        <th>Function</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>⌘ + R</td><td>macOS Recovery (from internal disk)</td></tr>
+      <tr><td>⌥</td><td>Startup Manager (choose boot disk)</td></tr>
+      <tr><td>⌘ + ⌥ + R</td><td>Internet Recovery (latest macOS)</td></tr>
+      <tr><td>⇧</td><td>Safe Mode</td></tr>
+      <tr><td>D</td><td>Apple Diagnostics</td></tr>
+      <tr><td>⌥ + D</td><td>Internet Diagnostics</td></tr>
+      <tr><td>T</td><td>Target Disk Mode</td></tr>
+      <tr><td>⌘ + S</td><td>Single User Mode (Intel only)</td></tr>
+      <tr><td>⌘ + V</td><td>Verbose Mode (see boot logs)</td></tr>
+      <tr><td>⌘ + ⌥ + P + R</td><td>Reset NVRAM/PRAM</td></tr>
+      <tr><td>Control + ⌘ + Power</td><td>Force Restart</td></tr>
+      <tr><td>Hold Power (M1/M2/M3)</td><td>Show Startup Options</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

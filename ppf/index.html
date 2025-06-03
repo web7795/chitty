@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Google Sheet Data Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Donations Tracker</h1>
+  <div class="button-container">
+    <button onclick="filterByName('Nagaraja Shetty')">Nagaraja Shetty</button>
+    <button onclick="filterByName('Shobha N')">Shobha N</button>
+    <button onclick="filterByName('Harish N')">Harish N</button>
+    <button onclick="filterByName('Jayashree')">Jayashree</button>
+    <button onclick="filterByName('Punith')">Punith</button>
+    <button onclick="showAll()">Total</button>
+  </div>
+
+ <table id="data-table">
+  <thead>
+    <tr>
+      <th>Timestamp</th>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td colspan="2"><strong>Total</strong></td>
+      <td id="totalAmount" colspan="2">0</td>
+    </tr>
+  </tfoot>
+  <tbody></tbody>
+</table>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
